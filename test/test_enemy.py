@@ -22,7 +22,7 @@ def harpy_test():
 
 @pytest.fixture
 def geant_python_test():
-    return GiantPython("Indentation", "He is so useful but sometimes he makes you crazy")
+    return GiantPython("Indentation", "He is so useful but sometimes he makes you crazy", 20)
 
 @pytest.fixture
 def player_test():
@@ -32,24 +32,24 @@ class TestEnemy:
     def test_enemy_health_points(self, goblin_test):
         assert goblin_test.health_points == 50
         with pytest.raises(ValueError):
-            goblin_test.health_points = 0
-
+            goblin_test.health_points = -1
+    
     def test_enemy_min_attack(self, harpy_test):
         assert harpy_test.min_attack == 10
         with pytest.raises(ValueError):
-            harpy_test.min_attack = 5
+            harpy_test.min_attack = 80
     
     def test_enemy_max_attack(self, geant_python_test):
         assert geant_python_test.max_attack == 27
         with pytest.raises(ValueError):
             geant_python_test.max_attack = 1
         
-    def test_attack(self, enemy_test, player_test):
+    def test_attack(self, harpy_test, player_test):
         assert harpy_test.attack(player_test) == player_test.player_hp
 
     def test_healing(self, goblin_test):
         assert goblin_test.healing(20) == 70
-    def test_healing_two(self, enemy_test):
+    def test_healing_two(self, goblin_test):
         assert goblin_test.healing(-5) == 45
-    def test_healing_three(self, enemy_test):
+    def test_healing_three(self, goblin_test):
         assert goblin_test.healing(10) == 60
