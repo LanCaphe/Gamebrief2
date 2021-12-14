@@ -23,7 +23,7 @@ class Menu():
 
   def start_game(self):
     """this fonction is the main menu of the game. Call others fonctions to lauch the game, read scores and quit the game"""
-    player_choice = input("1. Oui aller au combat \n2. Voir les scores \n3. Quitter le jeu.\n")
+    player_choice = input("1. Go to fighting \n2. show scores \n3. Quit game.\n")
     if player_choice == "1":
       Game(self.player_name)
       self.start_game()

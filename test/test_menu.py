@@ -21,6 +21,18 @@ class TestMenu:
         Menu().welcome_player()
         captured = capsys.readouterr()
         assert captured.out == "Welcome Joe, we were waiting you!\n"
+    
+    def test_start_game(self,monkeypatch, capsys):
+        """testing input player name, we will a string
+        monkeypatch can replace the input for lamba for testing"""
+        monkeypatch.setattr('builtins.input', lambda x : "1")
+        monkeypatch.setattr(Menu, 'start_game', no_func)
+        Menu().start_game()
+        captured = capsys.readouterr()
+        assert captured.out == "In a distant land, you were just an adventurer in search of glory. You were about to abandon your quest to settle down as a baker in a small village ... When the chance to turn and you are in front of Bobby, a Goblin.\n"
+
+
+
 
     def test_exit_game(self, monkeypatch, capsys):
         monkeypatch.setattr('builtins.input', lambda x : 3)
